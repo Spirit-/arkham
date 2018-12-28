@@ -22,7 +22,18 @@ class Game:
         self.phase = Phases(((Phases(self.phase).value + 1) % len(Phases)))
         if self.phase.value == 0:
             self.turn += 1
+            print('Starting turn %i' % self.turn)
 
     def set_environment_modifiers(self, **kwargs):
         self.environment_modifiers.clear()
         self.environment_modifiers.update(kwargs)
+
+    def start(self):
+        print('The game just started')
+        while True:
+            self.next_phase()
+            events.UseFocus(self.phase)
+            events.RefreshCards(self.phase)
+            events.UseTomes(self.phase)
+            events.Move(self.phase)
+            events.FightOrEvade(self.phase)

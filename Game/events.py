@@ -4,6 +4,12 @@ class Event:
     phase = None
     description = ""
 
+    def __init__(self, phase):
+        if self.phase and self.phase == phase:
+            print(self.description)
+            if input('Proceed?'):
+                return
+
 
 class UseFocus(Event):
     phase = Phases.UPKEEP
